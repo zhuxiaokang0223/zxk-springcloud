@@ -1,0 +1,58 @@
+# 全局配置
+spring:
+    application:
+        name: zxk-eureka-cluster # 应用名
+    profiles:
+        active: eserver1 # 默认启用的配置文件
+
+# 可以将以下3个Eureka服务的配置分成3个yml文件，效果相同。如：application-eserver1.yml  application-eserver2.yml  application-eserver3.yml
+# Eureka Server 1
+---
+spring:
+    profiles: eserver1
+server:
+    port: 6666
+
+eureka:
+    instance:
+        hostname: eserver1 # 主机名（需要配置host文件）
+    client:
+        register-with-eureka: true # 默认true, 是否注册自身到Eureka Server。（单节点部署需设置为false）
+        fetch-registry: true # 默认true，是否从Eureka Server获取注册信息。（单节点部署需设置为false）
+        serviceUrl:
+            defaultZone: http://eserver2:6667/eureka/,http://eserver3:6668/eureka/ # 集群情况配置多注册中心，号隔开
+
+
+# Eureka Server 2
+---
+spring:
+    profiles: eserver2
+
+server:
+    port: 6667
+
+eureka:
+    instance:
+        hostname: eserver2 # 主机名（需要配置host文件）
+    client:
+        register-with-eureka: true # 默认true, 是否注册自身到Eureka Server。（单节点部署需设置为false）
+        fetch-registry: true # 默认true，是否从Eureka Server获取注册信息。（单节点部署需设置为false）
+        serviceUrl:
+            defaultZone: http://eserver1:6666/eureka/,http://eserver3:6668/eureka/ # 集群情况配置多注册中心，号隔开
+
+# Eureka Server 3
+---
+spring:
+    profiles: eserver3
+
+server:
+    port: 6668
+
+eureka:
+    instance:
+        hostname: eserver3 # 主机名（需要配置host文件）
+    client:
+        register-with-eureka: true # 默认true, 是否注册自身到Eureka Server。（单节点部署需设置为false）
+        fetch-registry: true # 默认true，是否从Eureka Server获取注册信息。（单节点部署需设置为false）
+        serviceUrl:
+            defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/ # 集群情况配置多注册中心，号隔开
