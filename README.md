@@ -14,3 +14,12 @@ Eureka Server集群
     ```
     java -jar xxx.jar --spring.profiles.active=eserver2
     ```
+
+### eureka-client
+Eureka Client 客户端
+
+##### ums
+使用ribbon
+
+##### oms
+使用Feign
