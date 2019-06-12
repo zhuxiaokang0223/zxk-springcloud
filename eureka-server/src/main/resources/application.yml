@@ -16,6 +16,8 @@ server:
 eureka:
     instance:
         hostname: eserver1 # 主机名（需要配置host文件）
+    server:
+        enable-self-preservation: false # 关闭自我保护机制（开发环境，正式上线需要设置为true）
     client:
         register-with-eureka: true # 默认true, 是否注册自身到Eureka Server。（单节点部署需设置为false）
         fetch-registry: true # 默认true，是否从Eureka Server获取注册信息。（单节点部署需设置为false）
@@ -34,6 +36,8 @@ server:
 eureka:
     instance:
         hostname: eserver2 # 主机名（需要配置host文件）
+    server:
+        enable-self-preservation: false # 关闭自我保护机制（开发环境，正式上线需要设置为true）
     client:
         register-with-eureka: true # 默认true, 是否注册自身到Eureka Server。（单节点部署需设置为false）
         fetch-registry: true # 默认true，是否从Eureka Server获取注册信息。（单节点部署需设置为false）
@@ -51,6 +55,8 @@ server:
 eureka:
     instance:
         hostname: eserver3 # 主机名（需要配置host文件）
+    server:
+        enable-self-preservation: false # 关闭自我保护机制（开发环境，正式上线需要设置为true）
     client:
         register-with-eureka: true # 默认true, 是否注册自身到Eureka Server。（单节点部署需设置为false）
         fetch-registry: true # 默认true，是否从Eureka Server获取注册信息。（单节点部署需设置为false）
