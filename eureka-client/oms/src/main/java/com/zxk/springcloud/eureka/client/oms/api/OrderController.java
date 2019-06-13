@@ -29,4 +29,9 @@ public class OrderController {
         return mobile;
     }
 
+    @GetMapping("getOrderList")
+    public String getOrderList(String mobile) {
+        return "[1,2,3,4]";
+    }
+
 }
