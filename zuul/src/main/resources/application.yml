@@ -1,0 +1,26 @@
+spring:
+    application:
+        name: myZuulGetWay
+
+# 将网关注册到eureka，以便通过服务id路由
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/
+
+# 网关
+zuul:
+    ignored-services: '*'  # 忽略所有服务
+    routes:
+        # ums路由配置
+        umsapi:
+            path: /ums-api/**  # 所有访问地址以“/ums-api”开头的请求，都转发到ums服务
+            serviceId: ums    # ums服务id
+            stripPrefix: true  # 转发请求时，剥离前缀（true），既不包含/ums-api； 不剥离前缀（false）
+            #sensitiveHeaders: Cookie,Set-Cookie,Authorization # 设置不传递到下游服务的header属性。 置空，则表示传递header所有属性
+        # 也可以这样简单配置：
+        # ums: /ums-api/**  # 所有访问地址以“/ums-api”开头的请求，都转发到ums服务
+
+        # oms 路由配置
+        oms: /oms-api/**
+
