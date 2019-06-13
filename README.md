@@ -24,5 +24,5 @@ Eureka Client 客户端
 ##### oms
 使用Feign
 
-### Zuul
+### zuul
 zuul网关
