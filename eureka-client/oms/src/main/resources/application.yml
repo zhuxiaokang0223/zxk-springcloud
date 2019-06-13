@@ -4,6 +4,10 @@ spring:
 server:
     port: 5556
 
+## 配置Feign负载均衡算法（默认轮询），改为随机
+ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
 ## 配置eureka server服务地址
 eureka:
     client:
