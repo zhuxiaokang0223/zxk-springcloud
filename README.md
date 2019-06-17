@@ -26,3 +26,6 @@ Eureka Client 客户端
 
 ### zuul
 zuul网关
+
+### gateway
+spring-cloud-gateway网关
