@@ -1,0 +1,31 @@
+spring:
+    application:
+        name: auth-geteway
+    datasource:
+        username: root
+        password: root
+        url: jdbc:mysql://127.0.0.1:3306/ams?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+        driver-class-name: com.mysql.jdbc.Driver
+    redis:
+        host: 127.0.0.1
+        port: 6379
+
+
+# 将网关注册到eureka，以便通过服务id路由
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/
+
+# 网关
+zuul:
+    ignored-services: '*'  # 忽略所有服务
+    routes:
+        # ums路由配置
+        umsapi:
+            path: /ums-api/**  # 所有访问地址以“/ums-api”开头的请求，都转发到ums服务
+            serviceId: ums    # ums服务id
+
+        # oms 路由配置
+        oms: /oms-api/**
+    strip-prefix: true  # 转发请求时，剥离前缀（true），既不包含/ums-api； 不剥离前缀（false）

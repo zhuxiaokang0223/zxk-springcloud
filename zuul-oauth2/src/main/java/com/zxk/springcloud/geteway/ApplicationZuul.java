@@ -1,24 +1,22 @@
-package com.zxk.springcloud.geteway.zuul;
+package com.zxk.springcloud.geteway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 
 /**
- * @Description: Zuul网关
- *     注册到Eureka
+ * @Description: 网关
  * @Author: zhuxiaokang
- * @CreateDate: 2019/6/13 16:11
+ * @CreateDate: 2019/6/21 11:11
  * @Version: 1.0
  */
 @SpringBootApplication
 @EnableZuulProxy
-// 也可以使用@EnableZuulServer注解，区别在于@EnableZuulServer的过滤器更多
-//@EnableZuulServer
+@EnableDiscoveryClient
 public class ApplicationZuul {
-
     public static void main(String[] args) {
         SpringApplication.run(ApplicationZuul.class, args);
     }
-
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @Version: 1.0
  */
 @SpringBootApplication
-@EnableDiscoveryClient
 public class OAuth2Application {
 
     public static void main(String[] args) {

@@ -17,7 +17,7 @@ public class UserController {
         return "product id = "+ id;
     }
 
-    @GetMapping("/order1")
+    @GetMapping("/order")
     public String getOrder(String id){
         return "order id = "+id;
     }
