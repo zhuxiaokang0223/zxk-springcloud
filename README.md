@@ -35,3 +35,6 @@ spring-cloud-gateway网关
 
 ##### security-db
 使用数据库保存权限
+
+### zuul-auth
+zuul网关整合OAuth2
