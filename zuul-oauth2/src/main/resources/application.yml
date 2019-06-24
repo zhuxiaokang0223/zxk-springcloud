@@ -13,6 +13,9 @@ spring:
 
 # 将网关注册到eureka，以便通过服务id路由
 eureka:
+    instance:
+        lease-expiration-duration-in-seconds: 2  # 告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。(可以不设置)【Eureka Server及时踢出已失联的服务】
+        lease-renewal-interval-in-seconds: 1 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“ (可以不设置)【Eureka Server及时踢出已失联的服务】
     client:
         serviceUrl:
             defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/

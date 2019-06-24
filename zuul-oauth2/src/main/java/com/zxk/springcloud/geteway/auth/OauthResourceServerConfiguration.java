@@ -29,6 +29,7 @@ public class OauthResourceServerConfiguration extends ResourceServerConfigurerAd
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        //可以为每一个微服务实例设置一个resourceid。再给client授权的时候，可以设置这个client可以访问哪一些微服务实例，如果没设置，就是对所有的resource都有访问权限。
 //        resources.resourceId("order").stateless(true);
     }
 
