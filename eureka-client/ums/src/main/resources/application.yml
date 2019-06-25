@@ -10,3 +10,6 @@ eureka:
     client:
         serviceUrl:
             defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/
+## 日志
+logging:
+    config: classpath:log4j2.properties

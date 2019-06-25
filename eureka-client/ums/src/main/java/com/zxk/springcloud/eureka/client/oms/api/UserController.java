@@ -1,5 +1,7 @@
 package com.zxk.springcloud.eureka.client.oms.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +19,15 @@ import javax.annotation.Resource;
  @RequestMapping("/user/")
 public class UserController {
 
+     private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
      @Resource
      private RestTemplate restTemplate;
 
      @GetMapping("getUserNameByMobile")
      public String getUserNameByMobile(String mobile) {
         System.err.println("mobile="+mobile);
+        log.info("ums mobile {}", mobile);
         String userName = "张三";
         return userName;
      }
