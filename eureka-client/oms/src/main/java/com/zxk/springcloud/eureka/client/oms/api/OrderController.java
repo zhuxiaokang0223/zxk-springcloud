@@ -1,5 +1,6 @@
 package com.zxk.springcloud.eureka.client.oms.api;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.zxk.springcloud.eureka.client.oms.remote.UserApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public class OrderController {
     @Resource
     private UserApi userApi;
 
+
+
+    @HystrixCommand(fallbackMethod = "fallback")
     @GetMapping("getOrder")
     public String getOrder(String mobile) {
         System.err.println("order mobile="+mobile);
@@ -39,4 +43,12 @@ public class OrderController {
         return "[1,2,3,4]";
     }
 
+    /**
+     * 降级
+     * @param mobile
+     * @return
+     */
+    public String fallback(String mobile){
+        return "哦豁！被熔断了";
+    }
 }
