@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -35,6 +36,9 @@ public class OauthAuthorizationServerConfiguration extends AuthorizationServerCo
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @Bean
     public TokenStore tokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
@@ -53,7 +57,9 @@ public class OauthAuthorizationServerConfiguration extends AuthorizationServerCo
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .tokenStore(tokenStore());
+                .tokenStore(tokenStore())
+                // 要实现password模式，必须配置authenticationManager
+                .authenticationManager(authenticationManager);
     }
 
     /**

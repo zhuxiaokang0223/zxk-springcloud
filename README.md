@@ -31,10 +31,20 @@ zuul网关
 spring-cloud-gateway网关
 
 ### security 
-访问权限控制
+访问权限控制。
+
+已实现功能点：
+- access_token保存到redis
+- OAuth2 客户端模式、密码模式
+- 参与校验的用户信息可从数据库获取
 
 ##### security-db
 使用数据库保存权限
 
 ### zuul-auth
 zuul网关整合OAuth2
+
+已实现功能点：
+- access_token保存到redis
+- OAuth2 客户端模式、密码模式
+- 参与校验的用户信息可从数据库获取
