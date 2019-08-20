@@ -27,7 +27,7 @@ public class CustomizeUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // TODO 这个地方可以通过username从数据库获取正确的用户信息，包括密码和权限等。
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-        grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+        grantedAuthorityList.add(new SimpleGrantedAuthority("role0"));
         grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return new User(username, "{noop}123456", grantedAuthorityList);
     }

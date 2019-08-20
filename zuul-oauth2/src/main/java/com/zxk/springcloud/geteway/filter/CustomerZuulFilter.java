@@ -4,6 +4,8 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +68,7 @@ public class CustomerZuulFilter extends ZuulFilter {
         HttpServletRequest req = ctx.getRequest();
         // 3) 从请求中获取token
         String token = req.getParameter("access_token");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Enumeration p = req.getParameterNames();
         while(p.hasMoreElements()){
             String pname = (String)p.nextElement();

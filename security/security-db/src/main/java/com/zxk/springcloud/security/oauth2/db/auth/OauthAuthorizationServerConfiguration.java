@@ -42,13 +42,13 @@ public class OauthAuthorizationServerConfiguration extends AuthorizationServerCo
 //    @Autowired
 //    private DataSource dataSource;
 //
-//    @Autowired
-//    private RedisConnectionFactory redisConnectionFactory;
-//
-//    @Bean
-//    public TokenStore tokenStore() {
-//        return new RedisTokenStore(redisConnectionFactory);
-//    }
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new RedisTokenStore(redisConnectionFactory);
+    }
 ////
 ////    @Bean
 ////    public ClientDetailsService clientDetails() {
@@ -75,7 +75,7 @@ public class OauthAuthorizationServerConfiguration extends AuthorizationServerCo
 
 
     /************************************** 以下代码基于内存实现授权服务器 ****************************************************/
-    private TokenStore tokenStore = new InMemoryTokenStore();
+//    private TokenStore tokenStore = new InMemoryTokenStore();
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -115,7 +115,7 @@ public class OauthAuthorizationServerConfiguration extends AuthorizationServerCo
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .tokenStore(tokenStore)
+                .tokenStore(tokenStore())
                 .authenticationManager(authenticationManager);
 //        endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
     }
