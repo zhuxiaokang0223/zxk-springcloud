@@ -1,0 +1,48 @@
+## 硬编码配置路由
+#server:
+#    port: 8080
+#spring:
+#    application:
+#        name: gateway
+#    cloud:
+#        gateway:
+#            routes:
+#            - id: oms
+#              uri: http://localhost:5556
+#              predicates:
+#              - Path=/oms-api/**
+#              filters:
+#              - AddRequestHeader=X-Request-Foo, Bar
+#              - StripPrefix=1
+
+
+## 配合注册中心配置路由
+server:
+    port: 8080
+spring:
+    application:
+        name: gateway
+    cloud:
+        gateway:
+            discovery:
+                locator:
+                    enabled: true  # Gateway开启服务注册和发现的功能
+                    lower-case-service-id: true  # 将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了）
+            # discovery开启服务注册和发现的功能，会默认为所有服务创建路由，所以可以不配置routes。
+            # 也可以配置routes。
+            routes:
+            - id: oms-api-example
+              uri: lb://oms
+              predicates:
+                  - Path=/oms-api/**
+              filters:
+                  - StripPrefix=1
+
+## 配置eureka server服务地址
+eureka:
+    instance:
+        lease-expiration-duration-in-seconds: 60  # 告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。(可以不设置)【Eureka Server及时踢出已失联的服务】.要比lease-renewal-interval-in-seconds大
+        lease-renewal-interval-in-seconds: 30 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“ (可以不设置)【Eureka Server及时踢出已失联的服务】
+    client:
+        serviceUrl:
+            defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/
