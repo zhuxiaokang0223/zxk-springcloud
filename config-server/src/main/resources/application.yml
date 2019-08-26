@@ -1,0 +1,16 @@
+server:
+    port: 9000
+spring:
+    application:
+        name: config-server
+    cloud:
+        config:
+            server:
+                git:
+                    uri: https://github.com/zhuxiaokang0223/config.git
+                    username:
+                    password:
+                    search-paths: demo1/**
+
+            label: master
+

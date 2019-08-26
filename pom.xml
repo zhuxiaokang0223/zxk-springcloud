@@ -16,6 +16,8 @@
         <module>gateway</module>
         <module>security</module>
         <module>zuul-oauth2</module>
+        <module>config-server</module>
+        <module>config-client</module>
     </modules>
 
     <properties>

@@ -1,0 +1,11 @@
+server:
+    port: 9002
+spring:
+    cloud:
+        config:
+            uri: http://localhost:9000
+            profile: prod
+            # name不配置，则默认使用spring.application.name作为文件名前缀。  name可以有多个,以逗号隔开
+            name: app
+    application:
+        name: serverB
