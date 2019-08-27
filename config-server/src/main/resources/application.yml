@@ -1,16 +1,30 @@
 server:
     port: 9000
+
+# 单点配置中心
 spring:
     application:
         name: config-server
     cloud:
         config:
             server:
+                # git仓库config配置
                 git:
-                    uri: https://github.com/zhuxiaokang0223/config.git
-                    username:
-                    password:
-                    search-paths: demo1/**, common
-                    basedir: D:\job\project\my\git-config
-            label: master
+                    uri: https://github.com/zhuxiaokang0223/config.git # 远程git地址
+                    username:   # 用户名，公有可不填
+                    password:   # 密码， 公有可不填
+                    search-paths: demo1/**, common    # 需要扫描的配置文件目录。
+                                                       # 多个以逗号隔开；
+                                                       # 可以使用/**扫描目录下多个目录的文件。
+                                                       # 默认扫描根目录下的文件。
+                    basedir: D:\job\project\my\git-config  # config存放到本地的目录
+            label: master  # 分支
 
+#  加上eureka就成了高可用配置中心
+eureka:
+    instance:
+        lease-expiration-duration-in-seconds: 2  # 告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。(可以不设置)【Eureka Server及时踢出已失联的服务】.要比lease-renewal-interval-in-seconds大
+        lease-renewal-interval-in-seconds: 1 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“ (可以不设置)【Eureka Server及时踢出已失联的服务】
+    client:
+        serviceUrl:
+            defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/

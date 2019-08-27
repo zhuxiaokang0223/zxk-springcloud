@@ -1,11 +1,34 @@
 server:
     port: 9001
+
+# 单点config中心配置
+#spring:
+#    cloud:
+#        config:
+#            uri: http://localhost:9000
+#            profile: prod
+#            # name不配置，则默认使用spring.application.name作为文件名前缀。  name可以有多个
+##            name: serverA
+#    application:
+#        name: serverA
+
+# 配合eureka实现高可用的配置中心配置
 spring:
-    cloud:
-        config:
-            uri: http://localhost:9000
-            profile: prod
-            # name不配置，则默认使用spring.application.name作为文件名前缀。  name可以有多个
-#            name: serverA
     application:
         name: serverA
+    cloud:
+        config:
+            profile: prod
+            # 从注册中心拉取配置
+            discovery:
+                enabled: true   # 从配置中心读取文件。
+                service-id: config-server  #  配置中心的servieId，即服务名。
+
+#  加上eureka就成了高可用配置中心
+eureka:
+    instance:
+        lease-expiration-duration-in-seconds: 2  # 告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。(可以不设置)【Eureka Server及时踢出已失联的服务】.要比lease-renewal-interval-in-seconds大
+        lease-renewal-interval-in-seconds: 1 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“ (可以不设置)【Eureka Server及时踢出已失联的服务】
+    client:
+        serviceUrl:
+            defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/
