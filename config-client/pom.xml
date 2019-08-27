@@ -36,6 +36,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- 刷新配置，启用消息总线 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -19,6 +19,17 @@ spring:
                                                        # 默认扫描根目录下的文件。
                     basedir: D:\job\project\my\git-config  # config存放到本地的目录
             label: master  # 分支
+    rabbitmq:
+        host: 192.168.100.191
+        port: 5672
+        username: JC
+        password: 123
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: bus-refresh
 
 #  加上eureka就成了高可用配置中心
 eureka:
@@ -28,3 +39,4 @@ eureka:
     client:
         serviceUrl:
             defaultZone: http://eserver1:6666/eureka/,http://eserver2:6667/eureka/,http://eserver3:6668/eureka/
+

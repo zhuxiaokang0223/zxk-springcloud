@@ -23,6 +23,11 @@ spring:
             discovery:
                 enabled: true   # 从配置中心读取文件。
                 service-id: config-server  #  配置中心的servieId，即服务名。
+    rabbitmq:
+        host: 192.168.100.191
+        port: 5672
+        username: JC
+        password: 123
 
 #  加上eureka就成了高可用配置中心
 eureka:
