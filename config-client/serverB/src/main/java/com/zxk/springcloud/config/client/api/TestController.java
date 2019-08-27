@@ -16,6 +16,16 @@ public class TestController {
     @Value("${server.name}")
     private String serverName;
 
+    @Value("${config.pr}")
+    private String redisPr;
+
+
+
+    @GetMapping("/h1")
+    public String h1() {
+        return redisPr;
+    }
+
     @GetMapping("/h2")
     public String h2() {
         return serverName;

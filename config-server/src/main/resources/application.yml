@@ -10,7 +10,7 @@ spring:
                     uri: https://github.com/zhuxiaokang0223/config.git
                     username:
                     password:
-                    search-paths: demo1/**
-
+                    search-paths: demo1/**, common
+                    basedir: D:\job\project\my\git-config
             label: master
 
